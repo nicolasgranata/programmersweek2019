@@ -1,0 +1,30 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<canvas class="text-center" id="myCanvas" width="600" height="400"></canvas>
+<select id="color">
+    <option value="black">Black</option>
+    <option value="red">Red</option>
+    <option value="yellow">Yellow</option>
+    <option value="green">Green</option>
+    <option value="blue">Blue</option>
+</select>
+
+ <select id="width">
+    <option value="1">1</option>
+    <option value="3" selected="selected">3</option>
+    <option value="5">5</option>
+    <option value="7">7</option>
+    <option value="9">9</option>
+    <option value="11">11</option>
+</select>
+
+<button onclick="updateTool('erase')">Erase</button>
