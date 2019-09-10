@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PWSignalRNetCoreDemo.Hubs;
+using PWSignalRNetCoreDemo.Services;
 
 namespace PWSignalRNetCoreDemo
 {
@@ -32,7 +33,7 @@ namespace PWSignalRNetCoreDemo
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
+            services.AddSingleton<IUserService, UserService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddSignalR();
@@ -61,6 +62,7 @@ namespace PWSignalRNetCoreDemo
             app.UseSignalR(routes =>
             {
                 routes.MapHub<DrawHub>("/drawHub");
+                routes.MapHub<ChatHub>("/chatHub");
             });
         }
     }
