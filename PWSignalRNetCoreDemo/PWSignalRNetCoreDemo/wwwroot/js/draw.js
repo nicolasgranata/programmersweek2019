@@ -9,7 +9,6 @@ const ctx = canvas.getContext("2d");
 let toolType = 'draw';
 
 const initCanvas = function () {
-
     canvas.addEventListener('mousedown', (e) => {
         mousePressed = true;
         let x = e.pageX - canvas.offsetLeft;
@@ -85,6 +84,7 @@ connection.on('draw', function (lastX, lastY, currentX, currentY, color, tool, l
 
 connection.on('receiveDraw', function (drawList) {
     drawList.forEach(x => {
+        updateTool(x.tool);
         draw(x.lastX, x.lastY, x.currentX, x.currentY, true, x.color, x.lineWidth);
     });
 });
