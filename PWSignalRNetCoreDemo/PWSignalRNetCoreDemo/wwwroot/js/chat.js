@@ -45,13 +45,10 @@ chatConnection.on("ReceiveMessage", function (user, message) {
 
 chatConnection.start().then(function (userList) {
     document.getElementById("sendButton").disabled = false;
-    users = userList || [];
 
     nickName = prompt("Please enter your name");
 
-    chatConnection.invoke("NewUser", nickName).then(() => {
-        appendUserHtml(nickName);
-    }).catch(function (err) {
+    chatConnection.invoke("UpdateUsers", nickName).catch(function (err) {
         return console.error(err.toString());
     });
 }).catch(function (err) {
@@ -90,11 +87,23 @@ const updateUserList = () => {
     }
 }
 
-document.getElementById("sendButton").addEventListener("click", function (event) {
+document.getElementById('sendButton').addEventListener("click", function () {
+    handleSendEvent();
+});
+
+document.getElementById('messageInput').addEventListener('keypress', function (event) {
+    var key = event.which || event.keyCode;
+    if (key === 13) { // 13 is enter
+        handleSendEvent();
+    }
+});
+
+const handleSendEvent = () => {
     var message = document.getElementById("messageInput").value;
 
     chatConnection.invoke("SendMessage", nickName, message).catch(function (err) {
         return console.error(err.toString());
     });
-    event.preventDefault();
-});
+    
+    document.getElementById("messageInput").value = '';
+}

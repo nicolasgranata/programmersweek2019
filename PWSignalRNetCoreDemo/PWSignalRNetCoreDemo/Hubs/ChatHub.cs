@@ -19,10 +19,10 @@ namespace PWSignalRNetCoreDemo.Hubs
             await Clients.All.ReceiveMessage(user, message);
         }
 
-        public async Task NewUser(string user)
+        public Task UpdateUsers(string user)
         {
             _userService.AddUser(user, Context.ConnectionId);
-            await Clients.Others.UpdateUsers(user);
+            return Clients.All.UpdateUsers(user);
         }
 
         public Task SendMessageToCaller(string message)
