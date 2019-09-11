@@ -4,14 +4,16 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="row">
-    <div class="col-md-7">
-        <div class="text-center">
-            <h1 class="display-4">Welcome</h1>
-            <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-        </div>
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
 
-        <canvas class="text-center" id="myCanvas" width="600" height="400"></canvas>
+
+<div class="row">
+    <canvas id="myCanvas" width="600" height="400"></canvas>
+    <div class="col-md-7">
+
         <select id="color">
             <option value="black">Black</option>
             <option value="red">Red</option>
@@ -42,8 +44,7 @@
                             </div>
                         </div>
                         <table class="table table-striped table-hover">
-                            <tbody id="userList">
-                            </tbody>
+                            <tbody id="userList"></tbody>
                         </table>
                     </div>
                 </div>
@@ -61,7 +62,7 @@
                             <div class="panel-footer">
                                 <div class="input-group">
                                     <input id="messageInput" type="text" class="form-control input-sm chat_input"
-                                        placeholder="Write your message here..." />
+                                           placeholder="Write your message here..." />
                                     <span class="input-group-btn">
                                         <button class="btn btn-primary btn-sm" id="sendButton"></i>Send</button>
                                     </span>
