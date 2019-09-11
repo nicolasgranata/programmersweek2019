@@ -42,18 +42,21 @@
         <br>
         <div class="text-center">
             Line width
-            <select class="form-control" id="width">
-                <option value="1">1</option>
-                <option value="3" selected="selected">3</option>
-                <option value="5">5</option>
-                <option value="7">7</option>
-                <option value="9">9</option>
-                <option value="11">11</option>
-            </select>
+            <div class="col">
+                <select style="max-width: 100px; display: inline;" class="form-control" id="width">
+                    <option value="1">1</option>
+                    <option value="3" selected="selected">3</option>
+                    <option value="5">5</option>
+                    <option value="7">7</option>
+                    <option value="9">9</option>
+                    <option value="11">11</option>
+                </select>
+            </div>
+
+            <br>
+            <button class="btn btn-primary" onclick="updateTool('erase')">Erase</button>
         </div>
-       
         <br>
-        <button class="btn btn-primary btn-block" onclick="updateTool('erase')">Erase</button>
     </div>
     <div class="col-md-5">
         <div class="container">

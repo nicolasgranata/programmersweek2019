@@ -62,6 +62,7 @@ body {
 canvas {
   cursor: crosshair;
   border: 1px solid;
+  margin-left: 7%;
 }
 
 .chatperson {
