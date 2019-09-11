@@ -34,6 +34,8 @@ namespace PWSignalRNetCoreDemo
             });
 
             services.AddSingleton<IUserService, UserService>();
+            services.AddSingleton<IDrawService, DrawService>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddSignalR();

@@ -83,6 +83,12 @@ connection.on('draw', function (lastX, lastY, currentX, currentY, color, tool) {
     draw(lastX, lastY, currentX, currentY, true, color);
 });
 
+connection.on('receiveDraw', function (drawList) {
+    drawList.forEach(x => {
+        draw(x.lastX, x.lastY, x.currentX, x.currentY, true, x.color);
+    });
+});
+
 function clearArea() {
     // Use the identity matrix while clearing the canvas
     ctx.setTransform(1, 0, 0, 1, 0, 0);
