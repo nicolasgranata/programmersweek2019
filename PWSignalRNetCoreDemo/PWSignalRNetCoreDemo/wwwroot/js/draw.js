@@ -14,7 +14,7 @@ const initCanvas = function () {
         mousePressed = true;
         let x = e.pageX - canvas.offsetLeft;
         let y = e.pageY - canvas.offsetTop;
-        draw(lastX, lastY, x, y, true, document.querySelector('input[name="colorOptions"]:checked').id);
+        draw(lastX, lastY, x, y, true, document.querySelector('input[name="colorOptions"]:checked').id, document.getElementById('width').value);
     });
 
     canvas.addEventListener('mousemove', (e) => {
@@ -23,8 +23,8 @@ const initCanvas = function () {
 
         if (mousePressed) {
             let color = document.querySelector('input[name="colorOptions"]:checked').id;
-            draw(lastX, lastY, x, y, true, color);
-            sendDrawing(lastX, lastY, x, y, color, toolType);
+            draw(lastX, lastY, x, y, true, color, document.getElementById('width').value);
+            sendDrawing(lastX, lastY, x, y, color, toolType, document.getElementById('width').value);
         }
 
         lastX = x;
@@ -41,13 +41,13 @@ const initCanvas = function () {
     });
 }
 
-const draw = function (prevX, prevY, x, y, isDown, color) {
+const draw = function (prevX, prevY, x, y, isDown, color, lineWidth) {
     if (isDown) {
         ctx.beginPath();
         if (toolType === 'draw') {
             ctx.globalCompositeOperation = 'source-over';
             ctx.strokeStyle = color;
-            ctx.lineWidth = document.getElementById('width').value;
+            ctx.lineWidth = lineWidth;
         } else {
             ctx.globalCompositeOperation = 'destination-out';
             ctx.lineWidth = 10;
@@ -78,25 +78,19 @@ connection.start()
         return console.error(err.toString());
     });
 
-connection.on('draw', function (lastX, lastY, currentX, currentY, color, tool) {
+connection.on('draw', function (lastX, lastY, currentX, currentY, color, tool, lineWidth) {
     updateTool(tool)
-    draw(lastX, lastY, currentX, currentY, true, color);
+    draw(lastX, lastY, currentX, currentY, true, color, lineWidth);
 });
 
 connection.on('receiveDraw', function (drawList) {
     drawList.forEach(x => {
-        draw(x.lastX, x.lastY, x.currentX, x.currentY, true, x.color);
+        draw(x.lastX, x.lastY, x.currentX, x.currentY, true, x.color, x.lineWidth);
     });
 });
 
-function clearArea() {
-    // Use the identity matrix while clearing the canvas
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-};
-
-const sendDrawing = (prevX, prevY, currentX, currentY, color, tool) => {
-    connection.invoke('draw', prevX, prevY, currentX, currentY, color, tool)
+const sendDrawing = (prevX, prevY, currentX, currentY, color, tool, lineWidth) => {
+    connection.invoke('draw', prevX, prevY, currentX, currentY, color, tool, lineWidth)
         .catch(function (err) {
             console.error(err.toString());
         });

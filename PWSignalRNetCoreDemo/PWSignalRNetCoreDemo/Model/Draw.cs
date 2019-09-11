@@ -13,5 +13,6 @@ namespace PWSignalRNetCoreDemo.Model
         public int CurrentY { get; set; }
         public string Color { get; set; }
         public string Tool { get; set; }
+        public string LineWidth { get; set; }
     }
 }

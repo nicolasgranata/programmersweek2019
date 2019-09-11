@@ -13,10 +13,10 @@ namespace PWSignalRNetCoreDemo.Hubs
         {
             _drawService = drawService;
         } 
-        public Task Draw(int lastX, int lastY, int currentX, int currentY, string color, string tool)
+        public Task Draw(int lastX, int lastY, int currentX, int currentY, string color, string tool, string lineWidth)
         {
-            _drawService.AddDraw(new Draw { LastX = lastX, LastY = lastY, CurrentX = currentX, CurrentY = currentY, Color = color, Tool = tool });
-            return Clients.Others.SendAsync("draw", lastX, lastY, currentX, currentY, color, tool);
+            _drawService.AddDraw(new Draw { LastX = lastX, LastY = lastY, CurrentX = currentX, CurrentY = currentY, Color = color, Tool = tool, LineWidth = lineWidth });
+            return Clients.Others.SendAsync("draw", lastX, lastY, currentX, currentY, color, tool, lineWidth);
         }
 
         public override Task OnConnectedAsync()

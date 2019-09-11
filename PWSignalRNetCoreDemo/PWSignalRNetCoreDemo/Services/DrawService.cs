@@ -8,15 +8,20 @@ namespace PWSignalRNetCoreDemo.Services
 {
     public class DrawService : IDrawService
     {
-        private readonly Stack<Draw> _drawList;
+        private readonly Queue<Draw> _drawList;
 
         public DrawService()
         {
-            _drawList = new Stack<Draw>();
+            _drawList = new Queue<Draw>();
         }
         public void AddDraw(Draw model)
-        {
-            _drawList.Push(model);
+        { 
+            if(_drawList.Count > 5000)
+            {
+                _drawList.Dequeue();
+            }
+
+            _drawList.Enqueue(model);
         }
 
         public IEnumerable<Draw> GetDraws()
