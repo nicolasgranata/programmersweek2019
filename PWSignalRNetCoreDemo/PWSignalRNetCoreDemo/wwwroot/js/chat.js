@@ -2,16 +2,16 @@ const chatConnection = new signalR.HubConnectionBuilder()
     .withUrl("/chatHub")
     .build();
 
-var nickName = '';
-var users = [];
+let nickName = '';
+let users = [];
 
 //Disable send button until connection is established
 document.getElementById("sendButton").disabled = true;
 
 chatConnection.on("ReceiveMessage", function (user, message) {
-    var html;
+    let html;
 
-    var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    const msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
     if (user == nickName) {
         html = `<div class="row msg_container base_sent">
@@ -92,14 +92,14 @@ document.getElementById('sendButton').addEventListener("click", function () {
 });
 
 document.getElementById('messageInput').addEventListener('keypress', function (event) {
-    var key = event.which || event.keyCode;
+    const key = event.which || event.keyCode;
     if (key === 13) { // 13 is enter
         handleSendEvent();
     }
 });
 
 const handleSendEvent = () => {
-    var message = document.getElementById("messageInput").value;
+    const message = document.getElementById("messageInput").value;
 
     chatConnection.invoke("SendMessage", nickName, message).catch(function (err) {
         return console.error(err.toString());
