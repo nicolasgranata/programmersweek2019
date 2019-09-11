@@ -14,7 +14,7 @@ const initCanvas = function () {
         mousePressed = true;
         let x = e.pageX - canvas.offsetLeft;
         let y = e.pageY - canvas.offsetTop;
-        draw(lastX, lastY, x, y, true, document.getElementById('color').value);
+        draw(lastX, lastY, x, y, true, document.querySelector('input[name="colorOptions"]:checked').id);
     });
 
     canvas.addEventListener('mousemove', (e) => {
@@ -22,7 +22,7 @@ const initCanvas = function () {
         let y = e.pageY - canvas.offsetTop;
 
         if (mousePressed) {
-            let color = document.getElementById('color').value;
+            let color = document.querySelector('input[name="colorOptions"]:checked').id;
             draw(lastX, lastY, x, y, true, color);
             sendDrawing(lastX, lastY, x, y, color, toolType);
         }
