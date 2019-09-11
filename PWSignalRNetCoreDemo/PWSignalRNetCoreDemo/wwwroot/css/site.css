@@ -240,3 +240,12 @@ img {
   left: 0px;
   bottom: 0;
 }
+
+#btnGroup label {
+  height: 30px;
+  width: 80px
+}
+
+#btnGroup label.active {
+  border: dashed black 4px;
+}
